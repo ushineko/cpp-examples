@@ -16,7 +16,7 @@
  * @return ostream
  */
 template <class T1, class T2>
-std::ostream & operator << (std::ostream &os, std::map<T1, T2> &map) {
+std::ostream & operator << (std::ostream &os, std::map <T1, T2> &map) {
     int n = 0;
     os << "hi map! " << sizeof(T1) << " " << sizeof(T2) << std::endl;
     for (auto p : map) {
