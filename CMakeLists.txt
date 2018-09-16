@@ -4,14 +4,23 @@ project(cpp-examples)
 set(CMAKE_VERBOSE_MAKEFILE on)
 set(CMAKE_CXX_STANDARD 14)
 
+find_package(Protobuf REQUIRED)
+include_directories(${Protobuf_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS lib/protobuf/example.proto)
+
 set(BOOST_LIBRARIES boost_filesystem boost_system)
 
 include_directories(lib/example)
 add_library(examplefs SHARED lib/example/fs.cpp)
+target_link_libraries (examplefs ${BOOST_LIBRARIES})
 
 add_executable(printer printer.cpp)
-add_executable(filesystem filesystem.cpp lib/example/fs.h)
-add_dependencies(filesystem examplefs)
 
-target_link_libraries (examplefs ${BOOST_LIBRARIES})
+add_executable(filesystem filesystem.cpp)
+add_dependencies(filesystem examplefs)
 target_link_libraries (filesystem examplefs)
+
+add_executable(protobuf protobuf.cpp ${PROTO_SRCS} ${PROTO_HDRS})
+target_link_libraries(protobuf ${BOOST_LIBRARIES} ${Protobuf_LIBRARIES})
+

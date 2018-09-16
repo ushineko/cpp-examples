@@ -1,0 +1,7 @@
+syntax = "proto3";
+package example;
+message Url {
+    string url = 1;
+    bool lookup_dns = 2;
+    bool parse_url = 3;
+}
