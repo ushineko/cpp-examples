@@ -17,6 +17,8 @@ target_link_libraries (examplefs ${BOOST_LIBRARIES})
 
 add_library(examplelogger SHARED lib/example/logger.cpp)
 
+add_library(exampleutil SHARED lib/example/util.cpp)
+
 add_executable(printer printer.cpp)
 
 add_executable(filesystem filesystem.cpp)
@@ -24,5 +26,6 @@ add_dependencies(filesystem examplefs)
 target_link_libraries (filesystem examplefs examplelogger)
 
 add_executable(protobuf protobuf.cpp ${PROTO_SRCS} ${PROTO_HDRS})
-target_link_libraries(protobuf examplelogger ${BOOST_LIBRARIES} ${Protobuf_LIBRARIES})
+target_link_libraries(protobuf examplelogger exampleutil
+        ${BOOST_LIBRARIES} ${Protobuf_LIBRARIES})
 

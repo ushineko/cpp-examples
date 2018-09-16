@@ -5,6 +5,7 @@
 #include "example.pb.h"
 
 #include "lib/example/logger.h"
+#include "lib/example/util.h"
 
 auto lg = example::logger().instance();
 
@@ -21,11 +22,12 @@ BOOST_AUTO_TEST_CASE(protobuf_usage_test) {
     proto_url.SerializeToString(&data);
 
     lg->info("created serialized data of size {}",data.size());
+    lg->info("HEXDUMP:\n{}",example::util::hexdump(data));
 
     example::Url parsed_url;
     parsed_url.ParseFromString(data);
 
-    BOOST_TEST(parsed_url.url() == "https://www.google.com/");
-    BOOST_TEST(parsed_url.parse_url() == true);
-    BOOST_TEST(parsed_url.lookup_dns() == true);
+    BOOST_TEST((parsed_url.url()) == "https://www.google.com/");
+    BOOST_TEST((parsed_url.parse_url()) == true);
+    BOOST_TEST((parsed_url.lookup_dns()) == true);
 }
