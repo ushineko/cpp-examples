@@ -8,7 +8,7 @@
 #include <vector>
 #include <boost/filesystem.hpp>
 
-namespace examplefs {
+namespace example {
 
     /**
     * wrapper class for reading directory contents

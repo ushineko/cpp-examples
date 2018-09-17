@@ -13,7 +13,7 @@ auto lg = example::logger().instance();
 BOOST_AUTO_TEST_CASE(filesystem_test) {
     lg->info("Starting tests");
     boost::filesystem::path path(".");
-    examplefs::directory_reader reader(path);
+    example::directory_reader reader(path);
     const std::vector<boost::filesystem::path> &paths = reader();
     for (auto &p : paths) {
         lg->info("{0}",p.relative_path().string());

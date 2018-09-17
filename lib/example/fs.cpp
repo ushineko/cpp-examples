@@ -4,7 +4,7 @@
 
 #include "fs.h"
 
-namespace examplefs {
+namespace example {
 
     /**
     * create reader with fs::path
