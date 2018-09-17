@@ -2,17 +2,17 @@
  * filesystem example library header
  */
 
-#ifndef CPP_EXAMPLES_FS_H
-#define CPP_EXAMPLES_FS_H
+#ifndef CPP_LIBNJ_FS_H
+#define CPP_LIBNJ_FS_H
 
 #include <vector>
 #include <boost/filesystem.hpp>
 
-namespace example {
+namespace libnj { namespace fs {
 
     /**
-    * wrapper class for reading directory contents
-    */
+     * wrapper class for reading directory contents
+     */
     class directory_reader {
     public:
         explicit directory_reader(boost::filesystem::path &);
@@ -25,6 +25,6 @@ namespace example {
         boost::filesystem::path path_;
         std::vector<boost::filesystem::path> paths_;
     };
-}
+}}
 
-#endif //CPP_EXAMPLES_FS_H
+#endif //CPP_LIBNJ_FS_H

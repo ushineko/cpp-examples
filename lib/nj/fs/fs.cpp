@@ -4,23 +4,23 @@
 
 #include "fs.h"
 
-namespace example {
+namespace libnj { namespace fs {
 
     /**
-    * create reader with fs::path
-    * @param path
-    */
+     * create reader with fs::path
+     * @param path
+     */
     directory_reader::directory_reader(boost::filesystem::path &path) : path_(path) {}
 
     /**
-    * default dtor
-    */
+     * default dtor
+     */
     directory_reader::~directory_reader() {}
 
     /**
-    * read current dir contents and return vector of paths
-    * @return paths_
-    */
+     * read current dir contents and return vector of paths
+     * @return paths_
+     */
     const std::vector<boost::filesystem::path> &directory_reader::operator()() {
         paths_.clear();
         boost::filesystem::directory_iterator dirend;
@@ -30,4 +30,4 @@ namespace example {
         return paths_;
     }
 
-}
+}}

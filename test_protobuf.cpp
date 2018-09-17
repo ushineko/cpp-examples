@@ -4,10 +4,10 @@
 #include <boost/test/included/unit_test.hpp>
 #include "example.pb.h"
 
-#include "lib/example/logger.h"
-#include "lib/example/util.h"
+#include "lib/nj/util/logger.h"
+#include "lib/nj/util/hexdump.h"
 
-auto lg = example::logger().instance();
+auto lg = libnj::util::logger().instance();
 
 BOOST_AUTO_TEST_CASE(protobuf_usage_test) {
     GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -22,7 +22,7 @@ BOOST_AUTO_TEST_CASE(protobuf_usage_test) {
     proto_url.SerializeToString(&data);
 
     lg->info("created serialized data of size {}",data.size());
-    lg->info("HEXDUMP:\n{}",example::util::hexdump(data,16));
+    lg->info("HEXDUMP:\n{}",libnj::util::hexdump(data,16));
 
     example::Url parsed_url;
     parsed_url.ParseFromString(data);

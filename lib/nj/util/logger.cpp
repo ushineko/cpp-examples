@@ -1,10 +1,6 @@
-/**
- * logger impl
- */
-
 #include "logger.h"
 
-namespace example {
+namespace libnj { namespace util {
 
     logger::logger() noexcept {
         instance_ = spdlog::stdout_color_mt("log");
@@ -14,4 +10,4 @@ namespace example {
     std::shared_ptr<spdlog::logger> &logger::instance() {
         return instance_;
     }
-}
+}}

@@ -2,13 +2,13 @@
  * logger header
  */
 
-#ifndef CPP_EXAMPLES_LOGGER_H
-#define CPP_EXAMPLES_LOGGER_H
+#ifndef CPP_LIBNJ_UTIL_LOGGER_H
+#define CPP_LIBNJ_UTIL_LOGGER_H
 
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-namespace example {
+namespace libnj { namespace util {
     class logger {
     public:
         explicit logger() noexcept;
@@ -17,6 +17,6 @@ namespace example {
     private:
         std::shared_ptr<spdlog::logger> instance_;
     };
-}
+}}
 
-#endif //CPP_EXAMPLES_LOGGER_H
+#endif //CPP_LIBNJ_UTIL_LOGGER_H

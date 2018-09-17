@@ -1,19 +1,16 @@
-#define BOOST_TEST_MODULE filesystem_test
+#define BOOST_TEST_MODULE fs_test
 
 #include <iostream>
 #include <boost/test/included/unit_test.hpp>
-#include "lib/example/fs.h"
-#include "lib/example/logger.h"
+#include "lib/nj/fs/fs.h"
+#include "lib/nj/util/logger.h"
 
-#include <spdlog/spdlog.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
+auto lg = libnj::util::logger().instance();
 
-auto lg = example::logger().instance();
-
-BOOST_AUTO_TEST_CASE(filesystem_test) {
+BOOST_AUTO_TEST_CASE(fs_test_directory_reader) {
     lg->info("Starting tests");
     boost::filesystem::path path(".");
-    example::directory_reader reader(path);
+    libnj::fs::directory_reader reader(path);
     const std::vector<boost::filesystem::path> &paths = reader();
     for (auto &p : paths) {
         lg->info("{0}",p.relative_path().string());

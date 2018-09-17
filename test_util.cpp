@@ -4,10 +4,10 @@
 #include <fstream>
 #include <boost/test/included/unit_test.hpp>
 
-#include "lib/example/logger.h"
-#include "lib/example/util.h"
+#include "lib/nj/util/logger.h"
+#include "lib/nj/util/hexdump.h"
 
-auto lg = example::logger().instance();
+auto lg = libnj::util::logger().instance();
 
 /**
  * helper func to read a file
@@ -42,10 +42,10 @@ BOOST_AUTO_TEST_CASE(util_test_hexdump) {
     lg->info("Read {} bytes from {}",data_out.size(),filename_out);
 
     // test expected result
-    std::string dump_out = example::util::hexdump(data_in,16);
+    std::string dump_out = libnj::util::hexdump(data_in,16);
     BOOST_TEST(data_out == dump_out);
 
     // hexdump throws if width is out of bounds
     std::string foobar("foobar");
-    BOOST_CHECK_THROW(example::util::hexdump(foobar,128), std::runtime_error);
+    BOOST_CHECK_THROW(libnj::util::hexdump(foobar,128), std::runtime_error);
 }

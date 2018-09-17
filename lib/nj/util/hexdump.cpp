@@ -2,9 +2,9 @@
 #include <iomanip>
 #include <sstream>
 #include <exception>
-#include "util.h"
+#include "hexdump.h"
 
-namespace example {
+namespace libnj { namespace util {
 
     /**
      * return a hex dump of every width bytes (alternating hex value with printable)
@@ -12,7 +12,7 @@ namespace example {
      * @param width line width (must be in range)
      * @return string containing the dump. exception thrown if width out of range.
      */
-    std::string util::hexdump(const std::string &data, int width=8) {
+    std::string hexdump(const std::string &data, int width=8) {
         // before we do anything, validate width and throw if out of bounds
         if (width < 8 || width > 32) {
             throw std::runtime_error("bad width, must be between 8 and 32");
@@ -27,11 +27,10 @@ namespace example {
                 hdr();
             }
             dump << std::setw(2) << std::setfill('0') << std::hex << static_cast<int>(c)
-                << std::resetiosflags(std::ios::showbase) << " ";
+                 << std::resetiosflags(std::ios::showbase) << " ";
             ::isgraph(c) ? dump << c << " " : dump << "  ";
             where++;
         }
         return dump.str();
     }
-
-}
+}}
