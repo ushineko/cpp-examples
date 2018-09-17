@@ -44,7 +44,4 @@ BOOST_AUTO_TEST_CASE(util_test_hexdump) {
     // test expected result
     std::string dump_out = example::util::hexdump(data_in,16);
     BOOST_TEST(data_out == dump_out);
-
-    std::ofstream out("testdata");
-    out << dump_out;
 }
