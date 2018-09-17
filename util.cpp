@@ -44,4 +44,8 @@ BOOST_AUTO_TEST_CASE(util_test_hexdump) {
     // test expected result
     std::string dump_out = example::util::hexdump(data_in,16);
     BOOST_TEST(data_out == dump_out);
+
+    // hexdump throws if width is out of bounds
+    std::string foobar("foobar");
+    BOOST_CHECK_THROW(example::util::hexdump(foobar,128), std::runtime_error);
 }

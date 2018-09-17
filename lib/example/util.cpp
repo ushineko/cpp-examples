@@ -1,16 +1,22 @@
 #include <ostream>
 #include <iomanip>
 #include <sstream>
+#include <exception>
 #include "util.h"
 
 namespace example {
 
     /**
-     * return a hex dump of every 8 bytes (alternating hex value with printable)
+     * return a hex dump of every width bytes (alternating hex value with printable)
      * @param data data to dump, may be binary
-     * @return string containing the dump
+     * @param width line width (must be in range)
+     * @return string containing the dump. exception thrown if width out of range.
      */
     std::string util::hexdump(const std::string &data, int width=8) {
+        // before we do anything, validate width and throw if out of bounds
+        if (width < 8 || width > 32) {
+            throw std::runtime_error("bad width, must be between 8 and 32");
+        }
         std::ostringstream dump;
         int where = 0;
         auto hdr = [&dump, &where](){ dump << "[" << std::setw(4) << std::setfill('0') << where << "] "; };
