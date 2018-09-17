@@ -29,3 +29,15 @@ add_executable(protobuf protobuf.cpp ${PROTO_SRCS} ${PROTO_HDRS})
 target_link_libraries(protobuf examplelogger exampleutil
         ${BOOST_LIBRARIES} ${Protobuf_LIBRARIES})
 
+add_executable(util util.cpp)
+add_dependencies(util data examplelogger exampleutil)
+target_link_libraries(util examplelogger exampleutil ${BOOST_LIBRARIES})
+
+# needed for tests that require input/output
+add_custom_target(data)
+add_custom_command(
+        TARGET data POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_SOURCE_DIR}/data/*.txt
+        ${CMAKE_CURRENT_BINARY_DIR})
+

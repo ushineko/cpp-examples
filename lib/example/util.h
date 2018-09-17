@@ -6,7 +6,7 @@
 namespace example {
     class util {
     public:
-        static std::string hexdump(const std::string &);
+        static std::string hexdump(const std::string &, int);
     };
 }
 

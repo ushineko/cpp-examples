@@ -10,13 +10,13 @@ namespace example {
      * @param data data to dump, may be binary
      * @return string containing the dump
      */
-    std::string util::hexdump(const std::string &data) {
+    std::string util::hexdump(const std::string &data, int width=8) {
         std::ostringstream dump;
         int where = 0;
         auto hdr = [&dump, &where](){ dump << "[" << std::setw(4) << std::setfill('0') << where << "] "; };
         hdr();
         for (auto c : data) {
-            if (where % 8 == 0 && where>0) {
+            if (where % width == 0 && where>0) {
                 dump << std::endl;
                 hdr();
             }

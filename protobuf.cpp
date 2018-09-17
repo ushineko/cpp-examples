@@ -22,7 +22,7 @@ BOOST_AUTO_TEST_CASE(protobuf_usage_test) {
     proto_url.SerializeToString(&data);
 
     lg->info("created serialized data of size {}",data.size());
-    lg->info("HEXDUMP:\n{}",example::util::hexdump(data));
+    lg->info("HEXDUMP:\n{}",example::util::hexdump(data,16));
 
     example::Url parsed_url;
     parsed_url.ParseFromString(data);

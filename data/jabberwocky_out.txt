@@ -1,0 +1,66 @@
+[0000] 4a J 41 A 42 B 42 B 45 E 52 R 57 W 4f O 43 C 4b K 59 Y 0a   4c L 65 e 77 w 69 i 
+[0010] 73 s 20   43 C 61 a 72 r 72 r 6f o 6c l 6c l 0a   28 ( 66 f 72 r 6f o 6d m 20   
+[0020] 54 T 68 h 72 r 6f o 75 u 67 g 68 h 20   74 t 68 h 65 e 20   4c L 6f o 6f o 6b k 
+[0030] 69 i 6e n 67 g 2d - 47 G 6c l 61 a 73 s 73 s 20   61 a 6e n 64 d 20   57 W 68 h 
+[0040] 61 a 74 t 20   41 A 6c l 69 i 63 c 65 e 20   46 F 6f o 75 u 6e n 64 d 20   54 T 
+[0050] 68 h 65 e 72 r 65 e 2c , 20   31 1 38 8 37 7 32 2 29 ) 0a   60 ` 54 T 77 w 61 a 
+[0060] 73 s 20   62 b 72 r 69 i 6c l 6c l 69 i 67 g 2c , 20   61 a 6e n 64 d 20   74 t 
+[0070] 68 h 65 e 20   73 s 6c l 69 i 74 t 68 h 79 y 20   74 t 6f o 76 v 65 e 73 s 0a   
+[0080] 20   20   44 D 69 i 64 d 20   67 g 79 y 72 r 65 e 20   61 a 6e n 64 d 20   67 g 
+[0090] 69 i 6d m 62 b 6c l 65 e 20   69 i 6e n 20   74 t 68 h 65 e 20   77 w 61 a 62 b 
+[00a0] 65 e 3a : 0a   41 A 6c l 6c l 20   6d m 69 i 6d m 73 s 79 y 20   77 w 65 e 72 r 
+[00b0] 65 e 20   74 t 68 h 65 e 20   62 b 6f o 72 r 6f o 67 g 6f o 76 v 65 e 73 s 2c , 
+[00c0] 0a   20   20   41 A 6e n 64 d 20   74 t 68 h 65 e 20   6d m 6f o 6d m 65 e 20   
+[00d0] 72 r 61 a 74 t 68 h 73 s 20   6f o 75 u 74 t 67 g 72 r 61 a 62 b 65 e 2e . 0a   
+[00e0] 0a   22 " 42 B 65 e 77 w 61 a 72 r 65 e 20   74 t 68 h 65 e 20   4a J 61 a 62 b 
+[00f0] 62 b 65 e 72 r 77 w 6f o 63 c 6b k 2c , 20   6d m 79 y 20   73 s 6f o 6e n 21 ! 
+[0100] 0a   20   20   54 T 68 h 65 e 20   6a j 61 a 77 w 73 s 20   74 t 68 h 61 a 74 t 
+[0110] 20   62 b 69 i 74 t 65 e 2c , 20   74 t 68 h 65 e 20   63 c 6c l 61 a 77 w 73 s 
+[0120] 20   74 t 68 h 61 a 74 t 20   63 c 61 a 74 t 63 c 68 h 21 ! 0a   42 B 65 e 77 w 
+[0130] 61 a 72 r 65 e 20   74 t 68 h 65 e 20   4a J 75 u 62 b 6a j 75 u 62 b 20   62 b 
+[0140] 69 i 72 r 64 d 2c , 20   61 a 6e n 64 d 20   73 s 68 h 75 u 6e n 0a   20   20   
+[0150] 54 T 68 h 65 e 20   66 f 72 r 75 u 6d m 69 i 6f o 75 u 73 s 20   42 B 61 a 6e n 
+[0160] 64 d 65 e 72 r 73 s 6e n 61 a 74 t 63 c 68 h 21 ! 22 " 0a   48 H 65 e 20   74 t 
+[0170] 6f o 6f o 6b k 20   68 h 69 i 73 s 20   76 v 6f o 72 r 70 p 61 a 6c l 20   73 s 
+[0180] 77 w 6f o 72 r 64 d 20   69 i 6e n 20   68 h 61 a 6e n 64 d 3a : 0a   20   20   
+[0190] 4c L 6f o 6e n 67 g 20   74 t 69 i 6d m 65 e 20   74 t 68 h 65 e 20   6d m 61 a 
+[01a0] 6e n 78 x 6f o 6d m 65 e 20   66 f 6f o 65 e 20   68 h 65 e 20   73 s 6f o 75 u 
+[01b0] 67 g 68 h 74 t 20   2d - 2d - 0a   53 S 6f o 20   72 r 65 e 73 s 74 t 65 e 64 d 
+[01c0] 20   68 h 65 e 20   62 b 79 y 20   74 t 68 h 65 e 20   54 T 75 u 6d m 74 t 75 u 
+[01d0] 6d m 20   74 t 72 r 65 e 65 e 2c , 0a   20   20   41 A 6e n 64 d 20   73 s 74 t 
+[01e0] 6f o 6f o 64 d 20   61 a 77 w 68 h 69 i 6c l 65 e 20   69 i 6e n 20   74 t 68 h 
+[01f0] 6f o 75 u 67 g 68 h 74 t 2e . 0a   41 A 6e n 64 d 2c , 20   61 a 73 s 20   69 i 
+[0200] 6e n 20   75 u 66 f 66 f 69 i 73 s 68 h 20   74 t 68 h 6f o 75 u 67 g 68 h 74 t 
+[0210] 20   68 h 65 e 20   73 s 74 t 6f o 6f o 64 d 2c , 0a   20   20   54 T 68 h 65 e 
+[0220] 20   4a J 61 a 62 b 62 b 65 e 72 r 77 w 6f o 63 c 6b k 2c , 20   77 w 69 i 74 t 
+[0230] 68 h 20   65 e 79 y 65 e 73 s 20   6f o 66 f 20   66 f 6c l 61 a 6d m 65 e 2c , 
+[0240] 0a   43 C 61 a 6d m 65 e 20   77 w 68 h 69 i 66 f 66 f 6c l 69 i 6e n 67 g 20   
+[0250] 74 t 68 h 72 r 6f o 75 u 67 g 68 h 20   74 t 68 h 65 e 20   74 t 75 u 6c l 67 g 
+[0260] 65 e 79 y 20   77 w 6f o 6f o 64 d 2c , 0a   20   20   41 A 6e n 64 d 20   62 b 
+[0270] 75 u 72 r 62 b 6c l 65 e 64 d 20   61 a 73 s 20   69 i 74 t 20   63 c 61 a 6d m 
+[0280] 65 e 21 ! 0a   4f O 6e n 65 e 2c , 20   74 t 77 w 6f o 21 ! 20   4f O 6e n 65 e 
+[0290] 2c , 20   74 t 77 w 6f o 21 ! 20   41 A 6e n 64 d 20   74 t 68 h 72 r 6f o 75 u 
+[02a0] 67 g 68 h 20   61 a 6e n 64 d 20   74 t 68 h 72 r 6f o 75 u 67 g 68 h 0a   20   
+[02b0] 20   54 T 68 h 65 e 20   76 v 6f o 72 r 70 p 61 a 6c l 20   62 b 6c l 61 a 64 d 
+[02c0] 65 e 20   77 w 65 e 6e n 74 t 20   73 s 6e n 69 i 63 c 6b k 65 e 72 r 2d - 73 s 
+[02d0] 6e n 61 a 63 c 6b k 21 ! 0a   48 H 65 e 20   6c l 65 e 66 f 74 t 20   69 i 74 t 
+[02e0] 20   64 d 65 e 61 a 64 d 2c , 20   61 a 6e n 64 d 20   77 w 69 i 74 t 68 h 20   
+[02f0] 69 i 74 t 73 s 20   68 h 65 e 61 a 64 d 0a   20   20   48 H 65 e 20   77 w 65 e 
+[0300] 6e n 74 t 20   67 g 61 a 6c l 75 u 6d m 70 p 68 h 69 i 6e n 67 g 20   62 b 61 a 
+[0310] 63 c 6b k 2e . 0a   22 " 41 A 6e n 64 d 2c , 20   68 h 61 a 73 s 20   74 t 68 h 
+[0320] 6f o 75 u 20   73 s 6c l 61 a 69 i 6e n 20   74 t 68 h 65 e 20   4a J 61 a 62 b 
+[0330] 62 b 65 e 72 r 77 w 6f o 63 c 6b k 3f ? 0a   20   20   43 C 6f o 6d m 65 e 20   
+[0340] 74 t 6f o 20   6d m 79 y 20   61 a 72 r 6d m 73 s 2c , 20   6d m 79 y 20   62 b 
+[0350] 65 e 61 a 6d m 69 i 73 s 68 h 20   62 b 6f o 79 y 21 ! 0a   4f O 20   66 f 72 r 
+[0360] 61 a 62 b 6a j 6f o 75 u 73 s 20   64 d 61 a 79 y 21 ! 20   43 C 61 a 6c l 6c l 
+[0370] 6f o 6f o 68 h 21 ! 20   43 C 61 a 6c l 6c l 61 a 79 y 21 ! 27 ' 0a   20   20   
+[0380] 48 H 65 e 20   63 c 68 h 6f o 72 r 74 t 6c l 65 e 64 d 20   69 i 6e n 20   68 h 
+[0390] 69 i 73 s 20   6a j 6f o 79 y 2e . 0a   0a   60 ` 54 T 77 w 61 a 73 s 20   62 b 
+[03a0] 72 r 69 i 6c l 6c l 69 i 67 g 2c , 20   61 a 6e n 64 d 20   74 t 68 h 65 e 20   
+[03b0] 73 s 6c l 69 i 74 t 68 h 79 y 20   74 t 6f o 76 v 65 e 73 s 0a   20   20   44 D 
+[03c0] 69 i 64 d 20   67 g 79 y 72 r 65 e 20   61 a 6e n 64 d 20   67 g 69 i 6d m 62 b 
+[03d0] 6c l 65 e 20   69 i 6e n 20   74 t 68 h 65 e 20   77 w 61 a 62 b 65 e 3b ; 0a   
+[03e0] 41 A 6c l 6c l 20   6d m 69 i 6d m 73 s 79 y 20   77 w 65 e 72 r 65 e 20   74 t 
+[03f0] 68 h 65 e 20   62 b 6f o 72 r 6f o 67 g 6f o 76 v 65 e 73 s 2c , 0a   20   20   
+[0400] 41 A 6e n 64 d 20   74 t 68 h 65 e 20   6d m 6f o 6d m 65 e 20   72 r 61 a 74 t 
+[0410] 68 h 73 s 20   6f o 75 u 74 t 67 g 72 r 61 a 62 b 65 e 2e . 0a   0a   
