@@ -10,6 +10,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS lib/protobuf/example.proto)
 
 set(BOOST_LIBRARIES boost_filesystem boost_system)
+set(BOOST_LIBRARIES_ASIO boost_asio)
 
 include_directories(lib/example)
 add_library(examplefs SHARED lib/example/fs.cpp)
@@ -18,6 +19,9 @@ target_link_libraries (examplefs ${BOOST_LIBRARIES})
 add_library(examplelogger SHARED lib/example/logger.cpp)
 
 add_library(exampleutil SHARED lib/example/util.cpp)
+
+add_library(examplenetwork SHARED lib/example/network.cpp)
+target_link_libraries(examplenetwork ${BOOST_LIBRARIES})
 
 add_executable(printer printer.cpp)
 
@@ -33,11 +37,13 @@ add_executable(util util.cpp)
 add_dependencies(util data examplelogger exampleutil)
 target_link_libraries(util examplelogger exampleutil ${BOOST_LIBRARIES})
 
+add_executable(network network.cpp)
+add_dependencies(network examplelogger exampleutil examplenetwork)
+target_link_libraries(network examplelogger exampleutil examplenetwork)
+
 # needed for tests that require input/output
 add_custom_target(data)
 add_custom_command(
-        TARGET data POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-        ${CMAKE_SOURCE_DIR}/data/*.txt
-        ${CMAKE_CURRENT_BINARY_DIR})
+        TARGET data POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_SOURCE_DIR}/data/*.txt ${CMAKE_CURRENT_BINARY_DIR})
 
