@@ -9,8 +9,6 @@ include_directories(${Protobuf_INCLUDE_DIRS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS lib/protobuf/example.proto)
 
-#set(BOOST_LIBRARIES boost_filesystem boost_system)
-
 add_subdirectory(lib/nj/fs)
 add_subdirectory(lib/nj/net)
 add_subdirectory(lib/nj/util)
@@ -26,7 +24,7 @@ target_link_libraries(test_protobuf nj_util ${BOOST_LIBRARIES} ${Protobuf_LIBRAR
 
 add_executable(test_util test_util.cpp)
 add_dependencies(test_util data nj_util)
-target_link_libraries(test_util nj_util ${BOOST_LIBRARIES})
+target_link_libraries(test_util nj_util nj_fs)
 
 add_executable(test_net test_net.cpp)
 add_dependencies(test_net nj_util nj_net)

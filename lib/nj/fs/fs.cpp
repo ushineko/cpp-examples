@@ -30,4 +30,21 @@ namespace libnj { namespace fs {
         return paths_;
     }
 
+    /**
+     * read contents from file. data is appended to.
+     * @param filename file to read
+     * @param data data to write as string (appended)
+     * @return result from tellg(); e.g. the size of the file. -1 if read failed.
+     */
+    std::ifstream::pos_type readfile(const std::string &filename, std::string &data) {
+        std::ifstream reader(filename, std::ios::in | std::ios::binary | std::ios::ate);
+        std::ifstream::pos_type sz = reader.tellg();
+        if (sz < 0) return sz;
+        reader.seekg(0,std::ios::beg);
+        std::vector<char> bytes(sz);
+        reader.read(&bytes[0],sz);
+        data.append(&bytes[0],sz);
+        return sz;
+    }
+
 }}

@@ -25,6 +25,8 @@ namespace libnj { namespace fs {
         boost::filesystem::path path_;
         std::vector<boost::filesystem::path> paths_;
     };
+
+    std::ifstream::pos_type readfile(const std::string &, std::string &);
 }}
 
 #endif //CPP_LIBNJ_FS_H

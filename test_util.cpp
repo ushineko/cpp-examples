@@ -4,27 +4,11 @@
 #include <fstream>
 #include <boost/test/included/unit_test.hpp>
 
+#include "lib/nj/fs/fs.h"
 #include "lib/nj/util/logger.h"
 #include "lib/nj/util/hexdump.h"
 
 auto lg = libnj::util::logger().instance();
-
-/**
- * helper func to read a file
- * @param filename name of file (full path)
- * @param data
- * @return true if file was read, false otherwise
- */
-bool readfile(const std::string &filename, std::string &data) {
-    std::ifstream reader(filename, std::ios::in | std::ios::binary | std::ios::ate);
-    std::ifstream::pos_type sz = reader.tellg();
-    if (sz < 0) return false;
-    reader.seekg(0,std::ios::beg);
-    std::vector<char> bytes(sz);
-    reader.read(&bytes[0],sz);
-    data.assign(&bytes[0],sz);
-    return true;
-}
 
 BOOST_AUTO_TEST_CASE(util_test_hexdump) {
     lg->info("Starting tests for hexdump");
@@ -32,13 +16,13 @@ BOOST_AUTO_TEST_CASE(util_test_hexdump) {
     // input
     std::string filename_in = "jabberwocky_in.txt";
     std::string data_in;
-    BOOST_TEST(readfile(filename_in,data_in) == true);
+    BOOST_TEST(libnj::fs::readfile(filename_in,data_in) > 0);
     lg->info("Read {} bytes from {}",data_in.size(),filename_in);
 
     // expected output from hexdump
     std::string filename_out = "jabberwocky_out.txt";
     std::string data_out;
-    BOOST_TEST(readfile(filename_out,data_out) == true);
+    BOOST_TEST(libnj::fs::readfile(filename_out,data_out) > 0);
     lg->info("Read {} bytes from {}",data_out.size(),filename_out);
 
     // test expected result
