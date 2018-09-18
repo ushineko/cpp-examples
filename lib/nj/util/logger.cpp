@@ -2,8 +2,8 @@
 
 namespace libnj { namespace util {
 
-    logger::logger() noexcept {
-        instance_ = spdlog::stdout_color_mt("log");
+    logger::logger(std::string name) noexcept {
+        instance_ = spdlog::stdout_color_mt(name);
         instance_->set_pattern("[%H:%M:%S:%f %z] [%n::%l] [thread %t] %v");
     }
 

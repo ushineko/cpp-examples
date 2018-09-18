@@ -28,3 +28,6 @@ target_link_libraries(zmq_test_server nj_util nj_net)
 
 add_executable(zmq_test_client zmq/test_client.cpp)
 target_link_libraries(zmq_test_client nj_util nj_net)
+
+add_executable(zmq_ventilator zmq/zmq_ventilator.cpp)
+target_link_libraries(zmq_ventilator nj_util nj_net nj_fs)

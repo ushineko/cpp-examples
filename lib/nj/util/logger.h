@@ -11,7 +11,7 @@
 namespace libnj { namespace util {
     class logger {
     public:
-        explicit logger() noexcept;
+        explicit logger(std::string name="log") noexcept;
         ~logger() = default;
         std::shared_ptr<spdlog::logger> &instance();
     private:
