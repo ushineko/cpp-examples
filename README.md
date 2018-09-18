@@ -1,7 +1,6 @@
-C++ libraries and tools
-
-Required Libraries
+Required Libraries/Tools
 --
+* cmake (https://cmake.org/)
 * boost (https://www.boost.org/) 
 * spdlog (https://github.com/gabime/spdlog)
 * zeromq (http://zeromq.org/)
