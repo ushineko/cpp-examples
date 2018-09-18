@@ -47,4 +47,24 @@ namespace libnj { namespace fs {
         return sz;
     }
 
+    /**
+     * create line reader with fs::path
+     */
+     line_reader::line_reader(boost::filesystem::path &path) {
+         stream_.open(path.relative_path().string());
+     }
+     line_reader::~line_reader() {
+         stream_.close(); // for funsies only
+     }
+     /**
+      * read line and return it
+      * @param line ref to string
+      * @return true if line was successfully read from string. false otherwise.
+      */
+     bool line_reader::readline(std::string &line) {
+         std::getline(stream_,line);
+         if (stream_.eof()) return false;
+         return true;
+     }
+
 }}

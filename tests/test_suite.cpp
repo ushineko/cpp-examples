@@ -93,3 +93,19 @@ BOOST_AUTO_TEST_CASE(util_test_tokenizer) {
     t.next(tok); BOOST_TEST(tok == "4");
     BOOST_TEST(t.next(tok) == false);
 }
+
+BOOST_AUTO_TEST_CASE(fs_test_line_reader) {
+    lg->info("Starting tests for line_reader");
+
+    boost::filesystem::path p("jabberwocky_in.txt");
+    libnj::fs::line_reader lr(p);
+
+    std::string line;
+    int num=0;
+    while(lr.readline(line)) {
+        lg->info("Got line: {}",line);
+        num++;
+    }
+    lg->info("read {} lines",num);
+    BOOST_TEST(num == 34);
+}

@@ -27,6 +27,18 @@ namespace libnj { namespace fs {
     };
 
     std::ifstream::pos_type readfile(const std::string &, std::string &);
+
+    /**
+     * wrapper class for reading a file a line-at-a-time until EOF
+     */
+    class line_reader {
+    public:
+        explicit line_reader(boost::filesystem::path &);
+        ~line_reader();
+        bool readline(std::string &);
+    private:
+        std::ifstream stream_;
+    };
 }}
 
 #endif //CPP_LIBNJ_FS_H
