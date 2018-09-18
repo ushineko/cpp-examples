@@ -15,7 +15,6 @@ int main() {
     socket.connect(server_addr);
     lg->info("connected to {}",server_addr);
 
-    //  Do 10 requests, waiting each time for a response
     for (int request_nbr = 0; request_nbr != 100; request_nbr++) {
         libnj::net::zmq_helpers::send_message(socket,"FROM_CLIENT: Lemony Snicketerbottom");
         //  Get the reply.
