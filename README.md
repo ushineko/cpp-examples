@@ -49,3 +49,34 @@ a database/document storage)
 * anything beyond simple batching by the ventilator
 * although there are some stats recorded most details in the interest of time will 
 be elided.
+
+Set up instructions
+---
+
+**mac OS**
+
+brew install zeromq curl nlohmann_json protobuf cmake spdlog boost
+
+Make sure you have the latest Xcode tools (compiler) installed.
+
+in lib/, do a "git clone https://github.com/zeromq/cppzmq" to
+get the zeromq C++ wrapper. this does not have a brew recipe.
+
+cmake should be the latest version (3.12)
+
+(mkdir build && cd build && cmake ../ && make) **should** build all the binaries and unit tests.
+If not, there is a library or environment set up issue most likely.
+
+Development is done using CLion (https://www.jetbrains.com/clion/) and if you
+have a recent version of this already, you may use it to build and debug as
+well.
+
+**linux / ubuntu**
+
+none yet but packages and cmake invocation will be very similar.
+
+**windows**
+
+none yet but I have been careful not to use any platform-specific functionality in the
+existing code, and as far as I know all of the third-party libs and tools should be 
+cross-platform as well, including CLion.
