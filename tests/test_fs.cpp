@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <boost/test/included/unit_test.hpp>
-#include "lib/nj/fs/fs.h"
-#include "lib/nj/util/logger.h"
+#include "../lib/nj/fs/fs.h"
+#include "../lib/nj/util/logger.h"
 
 auto lg = libnj::util::logger().instance();
 

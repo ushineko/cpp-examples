@@ -4,8 +4,8 @@
 #include <fstream>
 #include <boost/test/included/unit_test.hpp>
 
-#include "lib/nj/util/logger.h"
-#include "lib/nj/net/curl.h"
+#include "../lib/nj/util/logger.h"
+#include "../lib/nj/net/curl.h"
 
 auto lg = libnj::util::logger().instance();
 

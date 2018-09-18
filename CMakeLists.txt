@@ -4,9 +4,6 @@ project(cpp-examples)
 set(CMAKE_VERBOSE_MAKEFILE on)
 set(CMAKE_CXX_STANDARD 14)
 
-find_package(Curl REQUIRED)
-include_directories(${Curl_INCLUDE_DIRS})
-
 find_package(Protobuf REQUIRED)
 include_directories(${Protobuf_INCLUDE_DIRS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
@@ -16,24 +13,24 @@ add_subdirectory(lib/nj/fs)
 add_subdirectory(lib/nj/net)
 add_subdirectory(lib/nj/util)
 
-add_executable(test_printer test_printer.cpp)
+add_executable(test_printer tests/test_printer.cpp)
 
-add_executable(test_fs test_fs.cpp)
+add_executable(test_fs tests/test_fs.cpp)
 add_dependencies(test_fs nj_fs nj_util)
 target_link_libraries (test_fs nj_fs nj_util)
 
-add_executable(test_protobuf test_protobuf.cpp ${PROTO_SRCS} ${PROTO_HDRS})
+add_executable(test_protobuf tests/test_protobuf.cpp ${PROTO_SRCS} ${PROTO_HDRS})
 target_link_libraries(test_protobuf nj_util ${BOOST_LIBRARIES} ${Protobuf_LIBRARIES})
 
-add_executable(test_util test_util.cpp)
+add_executable(test_util tests/test_util.cpp)
 add_dependencies(test_util data nj_util)
 target_link_libraries(test_util nj_util nj_fs)
 
-add_executable(test_net test_net.cpp)
+add_executable(test_net tests/test_net.cpp)
 add_dependencies(test_net nj_util nj_net)
 target_link_libraries(test_net nj_util nj_net)
 
-add_executable(test_curl test_curl.cpp)
+add_executable(test_curl tests/test_curl.cpp)
 add_dependencies(test_curl nj_util)
 target_link_libraries(test_curl nj_util nj_net)
 
