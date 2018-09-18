@@ -5,6 +5,6 @@ find_package(Curl REQUIRED)
 include_directories(${Curl_INCLUDE_DIRS})
 
 set(BOOST_LIBRARIES boost_filesystem boost_system)
-add_library(nj_net SHARED net.cpp curl.cpp)
-target_link_libraries (nj_net ${BOOST_LIBRARIES} ${CURL_LIBRARIES})
+add_library(nj_net SHARED net.cpp curl.cpp zmq_helpers.cpp)
+target_link_libraries (nj_net ${BOOST_LIBRARIES} ${CURL_LIBRARIES} -lzmq)
 

@@ -38,7 +38,7 @@ add_custom_command(
 
 # cmake has no included configuration for zmq.
 add_executable(zmq_test_server zmq/test_server.cpp)
-target_link_libraries(zmq_test_server nj_util -lzmq)
+target_link_libraries(zmq_test_server nj_util nj_net)
 
 add_executable(zmq_test_client zmq/test_client.cpp)
-target_link_libraries(zmq_test_client nj_util -lzmq)
+target_link_libraries(zmq_test_client nj_util nj_net)

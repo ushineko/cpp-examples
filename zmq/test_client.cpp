@@ -1,15 +1,10 @@
 #include "../lib/cppzmq/zmq.hpp"
 #include "../lib/nj/util/logger.h"
+#include "../lib/nj/net/zmq_helpers.h"
 #include <string>
 #include <iostream>
 
 auto lg = libnj::util::logger().instance();
-
-void send_message(zmq::socket_t &socket, const std::string &message) {
-    zmq::message_t msg(message.size());
-    ::memcpy(msg.data(), message.c_str(), message.size());
-    socket.send(msg);
-}
 
 int main() {
     lg->info("starting client");
@@ -22,7 +17,7 @@ int main() {
 
     //  Do 10 requests, waiting each time for a response
     for (int request_nbr = 0; request_nbr != 100; request_nbr++) {
-        send_message(socket,"FROM_CLIENT: Lemony Snicketerbottom");
+        libnj::net::zmq_helpers::send_message(socket,"FROM_CLIENT: Lemony Snicketerbottom");
         //  Get the reply.
         zmq::message_t reply;
         socket.recv (&reply);
