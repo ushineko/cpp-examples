@@ -14,6 +14,7 @@ add_subdirectory(lib/nj/net)
 add_subdirectory(lib/nj/util)
 
 add_executable(test_suite tests/test_suite.cpp ${PROTO_SRCS} ${PROTO_HDRS})
+add_dependencies(test_suite data)
 target_link_libraries(test_suite nj_util nj_fs nj_net ${Protobuf_LIBRARIES})
 
 # needed for tests that require input/output
