@@ -4,6 +4,9 @@ project(cpp-examples)
 set(CMAKE_VERBOSE_MAKEFILE on)
 set(CMAKE_CXX_STANDARD 14)
 
+find_package(Curl REQUIRED)
+include_directories(${Curl_INCLUDE_DIRS})
+
 find_package(Protobuf REQUIRED)
 include_directories(${Protobuf_INCLUDE_DIRS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
@@ -29,6 +32,10 @@ target_link_libraries(test_util nj_util nj_fs)
 add_executable(test_net test_net.cpp)
 add_dependencies(test_net nj_util nj_net)
 target_link_libraries(test_net nj_util nj_net)
+
+add_executable(test_curl test_curl.cpp)
+add_dependencies(test_curl nj_util)
+target_link_libraries(test_curl nj_util nj_net)
 
 # needed for tests that require input/output
 add_custom_target(data)
