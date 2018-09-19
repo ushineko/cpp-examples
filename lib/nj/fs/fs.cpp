@@ -59,11 +59,11 @@ namespace libnj { namespace fs {
      /**
       * read line and return it
       * @param line ref to string
-      * @return true if line was successfully read from string. false otherwise.
+      * @return true if line was successfully read from stream. false otherwise.
       */
      bool line_reader::readline(std::string &line) {
-         std::getline(stream_,line);
          if (stream_.eof()) return false;
+         std::getline(stream_,line);
          return true;
      }
 
