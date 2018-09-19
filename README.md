@@ -84,9 +84,10 @@ cross-platform as well, including CLion.
 Usage
 --
 After a successful build you will have the following files:
-* zmq_ventilator - the task generator
-* zmq_worker - the program that does actual work
-* zmq_sink - task collector and output
+* zmq_ventilator - the task generator. listens on port tcp/30001.
+* zmq_worker - the program that does actual work. connects to the ventilator
+and sink ports.
+* zmq_sink - task collector and output. listens on port tcp/30002.
 
 While you can start up the parts in any order, the recommended order is sink first, 
 followed by workers, followed by the ventilator.
@@ -113,6 +114,7 @@ space.
 JSON-formatted output (one record per line) is available and is written by the
 sink into the file "zmq_sink_output.txt". This file is appended to.
 
-**DO NOT** run more than one ventilator or sink. While this probably won't
-kill your system, it won't work either. The sink in particular writes to a file
-and will not handle multiple copies of itself. 
+The ventilator and sink may both only be run once because they bind to ports.
+Workers do not bind to ports but connect to the ventilator and sink respectively,
+so they may come and go as needed.
+
