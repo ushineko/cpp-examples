@@ -29,11 +29,14 @@ target_link_libraries(zmq_test_server nj_util nj_net)
 add_executable(zmq_test_client zmq/test_client.cpp)
 target_link_libraries(zmq_test_client nj_util nj_net)
 
-add_executable(zmq_ventilator zmq/zmq_ventilator.cpp)
-target_link_libraries(zmq_ventilator nj_util nj_net nj_fs)
+protobuf_generate_cpp(ZMQ_PAYLOAD_SRCS ZMQ_PAYLOAD_HDRS zmq/pb/zmq_payload.proto)
+set(ZMQ_PB, ${ZMQ_PAYLOAD_SRCS} ${ZMQ_PAYLOAD_HDRS})
 
-add_executable(zmq_sink zmq/zmq_sink.cpp)
-target_link_libraries(zmq_sink nj_util nj_net nj_fs)
+add_executable(zmq_ventilator zmq/zmq_ventilator.cpp ${ZMQ_PAYLOAD_SRCS} ${ZMQ_PAYLOAD_HDRS})
+target_link_libraries(zmq_ventilator nj_util nj_net nj_fs ${Protobuf_LIBRARIES})
 
-add_executable(zmq_worker zmq/zmq_worker.cpp)
-target_link_libraries(zmq_worker nj_util nj_net nj_fs)
+add_executable(zmq_sink zmq/zmq_sink.cpp ${ZMQ_PAYLOAD_SRCS} ${ZMQ_PAYLOAD_HDRS})
+target_link_libraries(zmq_sink nj_util nj_net nj_fs ${Protobuf_LIBRARIES})
+
+add_executable(zmq_worker zmq/zmq_worker.cpp ${ZMQ_PAYLOAD_SRCS} ${ZMQ_PAYLOAD_HDRS})
+target_link_libraries(zmq_worker nj_util nj_net nj_fs ${Protobuf_LIBRARIES})

@@ -15,6 +15,8 @@
 #include "../lib/cppzmq/zmq.hpp"
 #include "zmq_config.h"
 
+#include "zmq_payload.pb.h";
+
 auto lg = libnj::util::logger("zmq_ventilator").instance();
 
 int main (int argc, char **argv) {
@@ -34,13 +36,24 @@ int main (int argc, char **argv) {
     to_sink.connect(zmq_config::ventilator_connect_sink);
 
     lg->info("done. connected to sink on {}", zmq_config::ventilator_connect_sink);
-    libnj::net::zmq_helpers::send_message(to_sink,"0");
+    zmq_payload::Result marker;
+    marker.set_status("0");
+    std::string marker_data;
+    marker.SerializeToString(&marker_data);
+    libnj::net::zmq_helpers::send_message(to_sink,marker_data);
     lg->info("notifying sink and starting batch.");
 
     // send batch of jobs...testing only
     int num_tasks=zmq_config::batch_size;
+    uint32_t job_id=0;
     while(num_tasks--) {
-        libnj::net::zmq_helpers::send_message(to_worker,"www.google.com");
+        zmq_payload::Task task;
+        task.set_payload("https://www.google.com/");
+        task.set_type(zmq_payload::LOOKUP);
+        task.set_job_id(job_id++);
+        std::string data;
+        task.SerializeToString(&data);
+        libnj::net::zmq_helpers::send_message(to_worker,data);
         if (num_tasks % 10 == 0) { lg->info("[{}]",num_tasks); }
     }
 

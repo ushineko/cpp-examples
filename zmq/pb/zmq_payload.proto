@@ -1,0 +1,25 @@
+syntax = "proto3";
+package zmq_payload;
+
+enum TaskType {
+    LOOKUP = 0;
+    DOWNLOAD = 1;
+}
+
+message Task {
+    uint32 job_id  = 1;
+    uint32 time_submitted= 2;
+    TaskType type  = 3;
+    string payload = 4;
+}
+
+message Result {
+    uint32 job_id           = 1;
+    uint32 time_submitted   = 2;
+    uint32 time_processed   = 3;
+    uint32 download_size    = 4;
+    TaskType type           = 5;
+    repeated string ipv4_addresses = 6;
+    string payload          = 7;
+    string status           = 8;
+}

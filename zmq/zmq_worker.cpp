@@ -9,6 +9,7 @@
 
 #include "../lib/cppzmq/zmq.hpp"
 #include "zmq_config.h"
+#include "zmq_payload.pb.h"
 
 auto lg = libnj::util::logger("zmq_worker").instance();
 
@@ -40,21 +41,27 @@ int main() {
     while(1) {
         zmq::message_t message;
         job_socket.recv(&message);
-        lg->info("got job {}",message.str());
+        lg->info("got job data sz={}",message.size());
 
-        // append some stuff to the job payload
-        std::string payload(static_cast<char *>(message.data()), message.size());
-        payload += " JOBS_DONE ";
+        zmq_payload::Task task;
+        task.ParseFromString(std::string(static_cast<char*>(message.data()),message.size()));
 
-        curl.download("https://www.google.com");
+        zmq_payload::Result result;
+        result.set_payload(task.payload());
+        result.set_job_id(task.job_id());
+
+        curl.download(task.payload());
         const std::string &downloaded = curl.get_data();
 
         extra << pid << ":" << processed_count << ":" << downloaded.size();
-        payload += extra.str();
+        result.set_status(extra.str());
         extra.str("");
 
+        std::string result_str;
+        result.SerializeToString(&result_str);
+
         // send result to sink
-        libnj::net::zmq_helpers::send_message(result_socket,payload);
+        libnj::net::zmq_helpers::send_message(result_socket,result_str);
         lg->info("sent result to sink ({} {})",pid,processed_count);
         processed_count++;
     }
