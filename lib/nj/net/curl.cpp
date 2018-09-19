@@ -21,7 +21,7 @@ namespace libnj { namespace net {
         size_t curl::write_data(void *buf, size_t sz, size_t nm, void *userp) {
             size_t to_write = sz*nm;
             auto *data = static_cast<std::string *>(userp);
-            data->append(static_cast<const char *>(buf),to_write);
+            data->assign(static_cast<const char *>(buf),to_write);
             return to_write;
         }
 
