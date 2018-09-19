@@ -19,7 +19,7 @@ namespace zmq_config {
     // address to connect for ventilator to sink (this is the same as worker_connect_sink)
     std::string ventilator_connect_sink("tcp://localhost:30002");
 
-    // batch size -- X jobs will be sent between acks from ventilator to sink
+    // batch size -- for testing only
     uint32_t batch_size = 1000;
 };
 

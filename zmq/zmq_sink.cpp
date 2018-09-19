@@ -2,6 +2,8 @@
  * the sink collects and records results from the workers.
  */
 #include <iostream>
+#include <nlohmann/json.hpp>
+
 #include "../lib/nj/fs/fs.h"
 #include "../lib/nj/net/curl.h"
 #include "../lib/nj/net/net.h"
@@ -16,12 +18,32 @@
 
 auto lg = libnj::util::logger("zmq_sink").instance();
 
+/**
+ * convert the pb result to a json object
+ * @param result zmq_payload::Result
+ * @param record json object
+ */
+void result_to_json(zmq_payload::Result &result, nlohmann::json &record) {
+    record["job_id"] = result.job_id();
+    record["payload"] = result.payload();
+    record["status"]  = result.status();
+    record["time_submitted"] = result.time_submitted();
+    record["time_processed"] = result.time_processed();
+}
+
 int main () {
     lg->info("starting");
     zmq::context_t context(1);
 
     zmq::socket_t from_worker_or_ventilator(context, ZMQ_PULL);
     from_worker_or_ventilator.bind(zmq_config::sink_listen_worker_or_ventilator);
+
+    // open output file
+    boost::filesystem::path output_file("zmq_sink_output.txt");
+    std::ofstream output (output_file.relative_path().string(), std::ios::app | std::ios::ate | std::ios::binary);
+    if (!output.is_open()) {
+        lg->info("error: cannot open output file {}",output_file.relative_path().string());
+    }
 
     while(1) {
         // get message. may come from either a finished worker or the ventilator.
@@ -37,6 +59,9 @@ int main () {
         } else {
             lg->info("got completed job:{} {} {}",
                 result.job_id(),result.payload(),result.status());
+            nlohmann::json record;
+            result_to_json(result,record);
+            output << record.dump() << std::endl;
         }
     }
 }
