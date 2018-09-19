@@ -33,7 +33,8 @@ protobuf_generate_cpp(ZMQ_PAYLOAD_SRCS ZMQ_PAYLOAD_HDRS zmq/pb/zmq_payload.proto
 set(ZMQ_PB, ${ZMQ_PAYLOAD_SRCS} ${ZMQ_PAYLOAD_HDRS})
 
 add_executable(zmq_ventilator zmq/zmq_ventilator.cpp ${ZMQ_PAYLOAD_SRCS} ${ZMQ_PAYLOAD_HDRS})
-target_link_libraries(zmq_ventilator nj_util nj_net nj_fs ${Protobuf_LIBRARIES})
+add_dependencies(zmq_ventilator data)
+target_link_libraries(zmq_ventilator nj_util nj_net nj_fs ${Protobuf_LIBRARIES} boost_program_options)
 
 add_executable(zmq_sink zmq/zmq_sink.cpp ${ZMQ_PAYLOAD_SRCS} ${ZMQ_PAYLOAD_HDRS})
 target_link_libraries(zmq_sink nj_util nj_net nj_fs ${Protobuf_LIBRARIES})

@@ -50,19 +50,40 @@ int main() {
         result.set_payload(task.payload());
         result.set_job_id(task.job_id());
 
-        curl.download(task.payload());
-        const std::string &downloaded = curl.get_data();
+        extra << pid << ":" << processed_count;
 
-        extra << pid << ":" << processed_count << ":" << downloaded.size();
+        switch(task.type()){
+            case zmq_payload::LOOKUP: {
+                lg->info("looking up {}", task.payload());
+                libnj::net::ep::endpoints ep;
+                libnj::net::ep::lookup(task.payload(), ep);
+                for (auto e : ep) {
+                    std::string ipv4 = e.address().to_v4().to_string();
+                    result.add_ipv4_addresses(ipv4);
+                }
+                extra << ":" << result.ipv4_addresses_size();
+                break;
+            }
+            case zmq_payload::DOWNLOAD: {
+                lg->info("downloading {}", task.payload());
+                curl.download(task.payload());
+                const std::string &downloaded = curl.get_data();
+                extra << pid << ":" << processed_count << ":" << downloaded.size();
+                break;
+            }
+            default:
+                break;
+        }
+
         result.set_status(extra.str());
-        extra.str("");
 
         std::string result_str;
         result.SerializeToString(&result_str);
 
         // send result to sink
         libnj::net::zmq_helpers::send_message(result_socket,result_str);
-        lg->info("sent result to sink ({} {})",pid,processed_count);
+        lg->info("sent result to sink ({} {} {})",pid,processed_count,extra.str());
         processed_count++;
+        extra.str("");
     }
 }

@@ -4,6 +4,7 @@
  * for as long as it needs to and exits when all tasks have been sent.
  */
 #include <iostream>
+#include <boost/program_options.hpp>
 #include "../lib/nj/fs/fs.h"
 #include "../lib/nj/net/curl.h"
 #include "../lib/nj/net/net.h"
@@ -15,11 +16,43 @@
 #include "../lib/cppzmq/zmq.hpp"
 #include "zmq_config.h"
 
-#include "zmq_payload.pb.h";
+#include "zmq_payload.pb.h"
 
 auto lg = libnj::util::logger("zmq_ventilator").instance();
 
 int main (int argc, char **argv) {
+
+    boost::program_options::options_description desc("Allowed options");
+    desc.add_options()
+        ("help", "help!")
+        ("input,i", boost::program_options::value<std::string>(), "input file");
+
+    boost::program_options::variables_map opts;
+    boost::program_options::store(
+        boost::program_options::parse_command_line(argc,argv,desc),opts);
+    boost::program_options::notify(opts);
+
+    if  (opts.count("help")) {
+        std::cout << desc << std::endl;
+        return 1;
+    }
+
+    if (!opts.count("input")){
+        std::cout << "Error: input file is required" << std::endl;
+        return 1;
+    }
+
+    auto input_file = opts["input"].as<std::string>();
+
+    if (!boost::filesystem::exists(input_file)) {
+        std::cout << "Error: input file " << input_file << " does not exist" << std::endl;
+        return 1;
+    }
+
+    // initialize line by line file reader
+    boost::filesystem::path p(input_file);
+    libnj::fs::line_reader reader(p);
+
     zmq::context_t context(1);
     // socket to send worker messages on
     zmq::socket_t to_worker(context, ZMQ_PUSH);
@@ -43,18 +76,24 @@ int main (int argc, char **argv) {
     libnj::net::zmq_helpers::send_message(to_sink,marker_data);
     lg->info("notifying sink and starting batch.");
 
-    // send batch of jobs...testing only
-    int num_tasks=zmq_config::batch_size;
+    std::string line;
+    uint32_t line_count = 0;
     uint32_t job_id=0;
-    while(num_tasks--) {
+    while(reader.readline(line)) {
         zmq_payload::Task task;
-        task.set_payload("https://www.google.com/");
+        task.set_payload(line);
         task.set_type(zmq_payload::LOOKUP);
+        if (line.substr(0,4)=="http") {
+            task.set_type(zmq_payload::DOWNLOAD);
+            lg->info("task type set to DOWNLOAD for {}",line);
+        }
+
         task.set_job_id(job_id++);
         std::string data;
         task.SerializeToString(&data);
         libnj::net::zmq_helpers::send_message(to_worker,data);
-        if (num_tasks % 10 == 0) { lg->info("[{}]",num_tasks); }
+        if (line_count % 10 == 0) { lg->info("[{}]",line_count); }
+        line_count++;
     }
 
     lg->info("sent all workloads. done.");
