@@ -50,39 +50,30 @@ int main() {
         result.set_payload(task.payload());
         result.set_job_id(task.job_id());
 
-        extra << pid << ":" << processed_count;
-
-        switch(task.type()){
-            case zmq_payload::LOOKUP: {
-                lg->info("looking up {}", task.payload());
-                libnj::net::ep::endpoints ep;
-                libnj::net::ep::lookup(task.payload(), ep);
-                for (auto e : ep) {
-                    std::string ipv4 = e.address().to_v4().to_string();
-                    result.add_ipv4_addresses(ipv4);
-                }
-                extra << ":" << result.ipv4_addresses_size();
-                break;
-            }
-            case zmq_payload::DOWNLOAD: {
-                lg->info("downloading {}", task.payload());
-                curl.download(task.payload());
-                const std::string &downloaded = curl.get_data();
-                extra << pid << ":" << processed_count << ":" << downloaded.size();
-                break;
-            }
-            default:
-                break;
+        lg->info("looking up {}", task.payload());
+        libnj::net::ep::endpoints ep;
+        libnj::net::ep::lookup(task.payload(), ep);
+        for (auto e : ep) {
+            std::string ipv4 = e.address().to_v4().to_string();
+            result.add_ipv4_addresses(ipv4);
+            lg->info("adding {} to ipv4 list",ipv4);
         }
+        lg->info("downloading {}", task.payload());
+        curl.download(task.payload());
+        const std::string &downloaded = curl.get_data();
+        extra << processed_count << ":" << result.ipv4_addresses_size() << ":" << downloaded.size();
 
+        result.set_download_size((google::protobuf::int32)downloaded.size());
         result.set_status(extra.str());
+        result.set_alexa_rank(task.alexa_rank());
+        result.set_time_submitted(task.time_submitted());
 
         std::string result_str;
         result.SerializeToString(&result_str);
 
         // send result to sink
         libnj::net::zmq_helpers::send_message(result_socket,result_str);
-        lg->info("sent result to sink ({} {} {})",pid,processed_count,extra.str());
+        lg->info("sent result to sink ({})",extra.str());
         processed_count++;
         extra.str("");
     }
