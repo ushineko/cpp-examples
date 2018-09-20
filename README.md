@@ -98,23 +98,20 @@ exists for as long as it takes to generate available tasks, and then exits.
 Due to buffering, it is possible for the workers and sink to be busy long
 after the ventilator has completed.
 
-It is not recommended to run more workers than around the amount of CPU cores
-you have in your system. Also, there is still a lot of debug output and this
-will slow the processes down. To avoid this, you can redirect everything to
-/dev/null on MacOS or Linux systems.
+The optimal number of workers depends on the workload. For the tasks here, they
+are I/O bound and relatively speaking very slow (DNS lookups and HTTP download), therefore
+many workers beyond your number of effective CPU cores can be run. Right now I
+have not determined the optimal number but have tested with 5-10 successfully.
 
 Workers are dynamic. It is possible to add and remove workers while the 
 ventilator is running. However, if it is not running, stopping any of the
 workers will cause them to lose their buffered jobs.
 
-As of this writing, the ventilator sends a batch of identical test jobs. Soon
-this will be replaced with reading and processing from an input file. watch this
-space.
+The ventilator expects an input file in "alexa1m" format which is a comma
+delimited file with the format "<alexa_rank>,<hostname>" on each line. A randomly
+selected 10k-long list from this source is included.
 
 JSON-formatted output (one record per line) is available and is written by the
-sink into the file "zmq_sink_output.txt". This file is appended to.
-
-The ventilator and sink may both only be run once because they bind to ports.
-Workers do not bind to ports but connect to the ventilator and sink respectively,
-so they may come and go as needed.
+sink into the file "zmq_sink_output.txt". This file is appended to between
+multiple invocations of the sink.
 
