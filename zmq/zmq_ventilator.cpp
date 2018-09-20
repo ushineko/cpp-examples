@@ -5,6 +5,8 @@
  */
 #include <iostream>
 #include <boost/program_options.hpp>
+#include <boost/lexical_cast.hpp>
+
 #include "../lib/nj/fs/fs.h"
 #include "../lib/nj/net/curl.h"
 #include "../lib/nj/net/net.h"
@@ -80,14 +82,16 @@ int main (int argc, char **argv) {
     uint32_t line_count = 0;
     uint32_t job_id=0;
     while(reader.readline(line)) {
+        // first field is the alexa rank, second is the hostname (site)
+        libnj::util::tokenizer t;
+        t.split(line,",");
+        std::string alexa_rank ; t.next(alexa_rank);
+        std::string hostname ; t.next(hostname);
+        if (alexa_rank.empty()) continue; // skip empty lines
         zmq_payload::Task task;
-        task.set_payload(line);
-        task.set_type(zmq_payload::LOOKUP);
-        if (line.substr(0,4)=="http") {
-            task.set_type(zmq_payload::DOWNLOAD);
-            lg->info("task type set to DOWNLOAD for {}",line);
-        }
-
+        lg->info("alexa_rank={} hostname={}",alexa_rank,hostname);
+        task.set_payload(hostname);
+        task.set_alexa_rank(boost::lexical_cast<int>(alexa_rank.data()));
         task.set_job_id(job_id++);
         std::string data;
         task.SerializeToString(&data);
