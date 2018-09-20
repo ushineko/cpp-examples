@@ -3,6 +3,7 @@
  */
 #include <iostream>
 #include <nlohmann/json.hpp>
+#include <boost/function.hpp>
 
 #include "../lib/nj/fs/fs.h"
 #include "../lib/nj/net/curl.h"
@@ -29,6 +30,15 @@ void result_to_json(zmq_payload::Result &result, nlohmann::json &record) {
     record["status"]  = result.status();
     record["time_submitted"] = result.time_submitted();
     record["time_processed"] = result.time_processed();
+    record["download_size"] = result.download_size();
+    record["alexa_rank"] = result.alexa_rank();
+
+    // set the ipv4 address list
+    std::vector<std::string> ipv4_addresses;
+    for (int i = 0; i < result.ipv4_addresses_size(); ++i) {
+        ipv4_addresses.push_back(result.ipv4_addresses(i));
+    }
+    record["ipv4_addresses"] = ipv4_addresses;
 }
 
 int main () {
