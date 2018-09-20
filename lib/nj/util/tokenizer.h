@@ -9,7 +9,7 @@ namespace libnj { namespace util {
     public:
         tokenizer();
         ~tokenizer();
-        void split(const std::string &splitter, const std::string &data);
+        void split(const std::string &data, const std::string &splitter);
         bool next(std::string &token);
     private:
         boost::algorithm::split_iterator<std::string::const_iterator> iter_;
