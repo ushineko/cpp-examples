@@ -55,6 +55,13 @@ BOOST_AUTO_TEST_CASE(net_test_endpoint_lookup) {
     BOOST_TEST(epvec.size() >= 2);
     BOOST_TEST(epvec[0].address().to_string() == "34.208.114.108");
     BOOST_TEST(epvec[1].address().to_string() == "54.202.218.164");
+
+    // lookup a non existent address. this will add an "empty" endpoint to the list
+    // which should resolve as a string to "0.0.0.0"
+    epvec.clear();
+    libnj::net::ep::lookup("kwyjibo.flpphtht",epvec);
+    BOOST_TEST(epvec.size() == 1);
+    BOOST_TEST(epvec[0].address().to_string() == "0.0.0.0");
 }
 
 BOOST_AUTO_TEST_CASE(util_test_hexdump) {

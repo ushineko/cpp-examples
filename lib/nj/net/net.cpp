@@ -10,7 +10,13 @@ namespace libnj { namespace net {
         boost::asio::io_service io;
         boost::asio::ip::tcp::resolver res(io);
         boost::asio::ip::tcp::resolver::query q(host,"");
-        boost::asio::ip::tcp::resolver::iterator it = res.resolve(q);
+        boost::asio::ip::tcp::resolver::iterator it;
+        try {
+            it = res.resolve(q);
+        } catch (boost::system::system_error &error) {
+            epvec.push_back(boost::asio::ip::tcp::endpoint());
+            return;
+        }
         for (; it != boost::asio::ip::tcp::resolver::iterator(); ++it) {
             epvec.push_back(*it);
         }

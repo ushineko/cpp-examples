@@ -21,7 +21,7 @@ target_link_libraries(test_suite nj_util nj_fs nj_net ${Protobuf_LIBRARIES})
 add_custom_target(data)
 add_custom_command(
         TARGET data POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
-        ${CMAKE_SOURCE_DIR}/data/*.txt ${CMAKE_CURRENT_BINARY_DIR})
+        ${CMAKE_SOURCE_DIR}/data/* ${CMAKE_CURRENT_BINARY_DIR})
 
 add_executable(zmq_test_server zmq/test_server.cpp)
 target_link_libraries(zmq_test_server nj_util nj_net)
