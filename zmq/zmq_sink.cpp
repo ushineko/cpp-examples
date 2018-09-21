@@ -25,13 +25,15 @@ auto lg = libnj::util::logger("zmq_sink").instance();
  * @param record json object
  */
 void result_to_json(zmq_payload::Result &result, nlohmann::json &record) {
-    record["job_id"] = result.job_id();
+    record["job_id"]  = result.job_id();
     record["payload"] = result.payload();
     record["status"]  = result.status();
     record["time_submitted"] = result.time_submitted();
     record["time_processed"] = result.time_processed();
-    record["download_size"] = result.download_size();
-    record["alexa_rank"] = result.alexa_rank();
+    record["download_size"]  = result.download_size();
+    record["alexa_rank"]   = result.alexa_rank();
+    record["time_elapsed"] = result.time_processed() - result.time_submitted();
+    record["worker_pid"]   = result.worker_pid();
 
     // set the ipv4 address list
     std::vector<std::string> ipv4_addresses;

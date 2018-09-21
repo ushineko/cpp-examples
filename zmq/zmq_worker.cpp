@@ -6,6 +6,7 @@
 #include "../lib/nj/util/hexdump.h"
 #include "../lib/nj/util/tokenizer.h"
 #include "../lib/nj/util/logger.h"
+#include "../lib/nj/util/time.h"
 
 #include "../lib/cppzmq/zmq.hpp"
 #include "zmq_config.h"
@@ -49,6 +50,7 @@ int main() {
         zmq_payload::Result result;
         result.set_payload(task.payload());
         result.set_job_id(task.job_id());
+        result.set_time_submitted((uint32_t)libnj::util::time::now());
 
         lg->info("looking up {}", task.payload());
         libnj::net::ep::endpoints ep;
@@ -66,7 +68,8 @@ int main() {
         result.set_download_size((google::protobuf::int32)downloaded.size());
         result.set_status(extra.str());
         result.set_alexa_rank(task.alexa_rank());
-        result.set_time_submitted(task.time_submitted());
+        result.set_time_processed(libnj::util::time::now());
+        result.set_worker_pid(pid);
 
         std::string result_str;
         result.SerializeToString(&result_str);
