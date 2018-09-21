@@ -8,6 +8,7 @@
 #include "../lib/nj/util/hexdump.h"
 #include "../lib/nj/util/tokenizer.h"
 #include "../lib/nj/util/logger.h"
+#include "../lib/nj/util/time.h"
 
 #include "example.pb.h"
 
@@ -138,4 +139,11 @@ BOOST_AUTO_TEST_CASE(protobuf_example_test) {
     BOOST_TEST((parsed_url.url()) == "https://www.google.com/");
     BOOST_TEST((parsed_url.parse_url()) == true);
     BOOST_TEST((parsed_url.lookup_dns()) == true);
+}
+
+BOOST_AUTO_TEST_CASE(util_test_time_now) {
+    std::time_t t1 = libnj::util::time::now();
+    std::time_t t2 = libnj::util::time::now();
+    lg->info("{} {}",t1,t2);
+    BOOST_TEST(t2-t1 < 2);
 }
